@@ -5,9 +5,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigate,
 } from "@remix-run/react";
+import { NextUIProvider } from "@nextui-org/react";
+import "~/styles/tailwind.css";
 
 export default function App() {
+  const navigate = useNavigate();
+
   return (
     <html lang="en">
       <head>
@@ -17,10 +22,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <LiveReload />
-        <Scripts />
+        <NextUIProvider navigate={navigate}>
+          <Outlet />
+          <ScrollRestoration />
+          <LiveReload />
+          <Scripts />
+        </NextUIProvider>
       </body>
     </html>
   );

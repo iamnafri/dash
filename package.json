@@ -5,29 +5,52 @@
   "type": "module",
   "scripts": {
     "build": "vite build && vite build --ssr",
+    "db:gen": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio",
     "dev": "vite dev",
     "start": "remix-serve ./build/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@conform-to/react": "^0.9.1",
+    "@conform-to/zod": "^0.9.1",
+    "@epic-web/remember": "^1.0.2",
+    "@heroicons/react": "^2.0.18",
+    "@nextui-org/react": "^2.2.9",
+    "@prisma/client": "^5.6.0",
     "@remix-run/node": "^2.2.0",
     "@remix-run/react": "^2.2.0",
     "@remix-run/serve": "^2.2.0",
+    "bcryptjs": "^2.4.3",
+    "chalk": "^5.3.0",
+    "framer-motion": "^10.16.5",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.2.0",
     "@remix-run/eslint-config": "^2.2.0",
+    "@types/bcryptjs": "^2.4.6",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.38.0",
+    "postcss": "^8.4.31",
+    "prisma": "^5.6.0",
+    "tailwindcss": "^3.3.5",
+    "tsx": "^4.4.0",
     "typescript": "^5.1.6",
     "vite": "^4.5.0",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   }
 }
