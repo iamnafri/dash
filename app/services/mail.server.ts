@@ -3,11 +3,12 @@ import nodemailer from "nodemailer";
 
 export const mailer = remember("mailer", () =>
   nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.NODE_ENV === "production",
     auth: {
-      user: "donna30@ethereal.email",
-      pass: "dw9UexekRZuNSkjS25",
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
   })
 );
@@ -25,8 +26,6 @@ export async function sendResetPasswordEmail({
     subject: "Remix Dashboard - Reset Password",
     html,
   });
-
-  console.log(mailInfo);
 
   if (!mailInfo.messageId) return null;
 

@@ -6,7 +6,7 @@ export const authSessionStorage = createCookieSessionStorage({
     sameSite: "lax",
     path: "/",
     httpOnly: true,
-    secrets: ["s3cr3t"],
+    secrets: process.env.SESSION_SECRET.split(","),
     secure: process.env.NODE_ENV === "production",
   },
 });
