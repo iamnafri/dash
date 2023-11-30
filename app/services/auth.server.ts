@@ -1,11 +1,24 @@
 import { Password, Session, User } from "@prisma/client";
 import { redirect } from "@remix-run/node";
 import bcrypt from "bcryptjs";
+import crypto from "node:crypto";
 import { authSessionStorage } from "~/services/session.server";
 import { prisma } from "~/utils/db.server";
 
+// Session expiration in one month
 const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
 const sessionExpirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
+
+// Token expiration in 30 minutes
+const RESET_TOKEN_EXPIRATION_TIME = 1000 * 60 * 30;
+const resetTokenExpirationDate = new Date(
+  Date.now() + RESET_TOKEN_EXPIRATION_TIME
+);
+
+export async function createHashData(value: string) {
+  const hash = await bcrypt.hash(value, 10);
+  return hash;
+}
 
 export async function verifyUserCredential(
   email: User["email"],
@@ -27,7 +40,7 @@ export async function verifyUserCredential(
 
 export async function handleNewLoginSession(
   request: Request,
-  session: Pick<Session, "expirationDate" | "id" | "userId">
+  session: Pick<Session, "expires" | "id" | "userId">
 ) {
   const authSession = await authSessionStorage.getSession(
     request.headers.get("cookie")
@@ -37,7 +50,7 @@ export async function handleNewLoginSession(
   return redirect("/", {
     headers: {
       "set-cookie": await authSessionStorage.commitSession(authSession, {
-        expires: session.expirationDate,
+        expires: session.expires,
       }),
     },
   });
@@ -55,9 +68,9 @@ export async function login({
   if (!userId) return null;
 
   const session = await prisma.session.create({
-    select: { id: true, expirationDate: true, userId: true },
+    select: { id: true, expires: true, userId: true },
     data: {
-      expirationDate: sessionExpirationDate,
+      expires: sessionExpirationDate,
       userId: userId,
     },
   });
@@ -90,7 +103,7 @@ export async function requireUserId(request: Request) {
 
   const session = await prisma.session.findUnique({
     select: { user: { select: { id: true } } },
-    where: { id: sessionId, expirationDate: { gt: new Date() } },
+    where: { id: sessionId, expires: { gt: new Date() } },
   });
   if (!session?.user) {
     throw redirect("/", {
@@ -107,4 +120,53 @@ export async function requireAnonymous(request: Request) {
   if (userId) {
     throw redirect("/");
   }
+}
+
+export async function createResetToken(userId: User["id"]) {
+  const generatedToken = crypto.randomBytes(32).toString("hex");
+
+  const resetTokenData = {
+    expires: resetTokenExpirationDate,
+    token: generatedToken,
+    userId,
+  };
+
+  await prisma.passwordResetToken.upsert({
+    where: { userId },
+    create: resetTokenData,
+    update: resetTokenData,
+    select: { token: true },
+  });
+
+  return generatedToken;
+}
+
+export async function resetUserPassword({
+  userId,
+  password,
+}: {
+  userId: User["id"];
+  password: string;
+}) {
+  const hashedPassword = await createHashData(password);
+  return prisma.user.update({
+    where: { id: userId },
+    data: {
+      password: {
+        update: {
+          hash: hashedPassword,
+        },
+      },
+      passwordResetToken: {
+        delete: {
+          userId,
+        },
+      },
+      session: {
+        deleteMany: {
+          userId,
+        },
+      },
+    },
+  });
 }
