@@ -38,23 +38,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
   const requestUrl = new URL(request.url);
 
-  const submission = await parse(formData, {
-    schema: ForgotPasswordSchema.superRefine(async (data, ctx) => {
-      const user = await prisma.user.findUnique({
-        where: { email: data.email },
-        select: { id: true },
-      });
-      if (!user) {
-        ctx.addIssue({
-          path: ["email"],
-          code: z.ZodIssueCode.custom,
-          message: "No user exists with this email",
-        });
-        return;
-      }
-    }),
-    async: true,
-  });
+  const submission = await parse(formData, { schema: ForgotPasswordSchema });
 
   if (submission.intent !== "submit") {
     return json({ status: "idle", submission } as const);
@@ -66,10 +50,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const { email } = submission.value;
 
-  const user = await prisma.user.findUniqueOrThrow({
+  const user = await prisma.user.findUnique({
     where: { email },
     select: { id: true },
   });
+
+  if (!user) {
+    return json({ status: "done", submission });
+  }
 
   const resetToken = await createResetToken(user.id);
 
