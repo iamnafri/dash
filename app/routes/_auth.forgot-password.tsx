@@ -61,7 +61,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const resetToken = await createResetToken(user.id);
 
-  await sendResetPasswordEmail({
+  sendResetPasswordEmail({
     email,
     html: `<a href="${requestUrl.origin}/reset-password?token=${resetToken}">Reset Paassword</a>`,
   });

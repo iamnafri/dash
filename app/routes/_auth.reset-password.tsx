@@ -67,7 +67,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     select: { userId: true },
   });
 
-  if (!user?.userId) {
+  if (!user) {
     return json({ status: "error", userId: null } as const, {
       status: 400,
     });
@@ -91,12 +91,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     return json({ status: "error", submission } as const, { status: 400 });
   }
 
-  console.log(submission.value);
-
   const { password, userId } = submission.value;
 
   const { email } = await resetUserPassword({ userId, password });
-  await sendUpdatedPasswordEmail({
+  sendUpdatedPasswordEmail({
     email,
     html: `<p>Your passsword has changed</p>`,
   });
