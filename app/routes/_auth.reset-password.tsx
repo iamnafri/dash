@@ -93,10 +93,11 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const { password, userId } = submission.value;
 
-  const { email } = await resetUserPassword({ userId, password });
+  const { email, name } = await resetUserPassword({ userId, password });
+
   sendUpdatedPasswordEmail({
+    name,
     email,
-    html: `<p>Your passsword has changed</p>`,
   });
 
   return redirect("/login");

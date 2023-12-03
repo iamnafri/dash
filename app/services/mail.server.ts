@@ -1,5 +1,8 @@
 import { remember } from "@epic-web/remember";
+import { render } from "@react-email/components";
 import nodemailer from "nodemailer";
+import { PasswordUpdated } from "~/emails/password-upated";
+import { ResetPasswordLink } from "~/emails/reset-password-link";
 
 export const mailer = remember("mailer", () =>
   nodemailer.createTransport({
@@ -15,16 +18,18 @@ export const mailer = remember("mailer", () =>
 
 export async function sendResetPasswordEmail({
   email,
-  html,
+  name,
+  resetLink,
 }: {
   email: string;
-  html: string;
+  name: string;
+  resetLink: string;
 }) {
   const mailInfo = await mailer.sendMail({
     from: '"Remix Dashboard" <no-reply@mail.io>',
     to: email,
     subject: "Remix Dashboard - Reset Password",
-    html,
+    html: render(ResetPasswordLink({ email, name, resetLink })),
   });
 
   if (!mailInfo.messageId) return null;
@@ -34,16 +39,16 @@ export async function sendResetPasswordEmail({
 
 export async function sendUpdatedPasswordEmail({
   email,
-  html,
+  name,
 }: {
   email: string;
-  html: string;
+  name: string;
 }) {
   const mailInfo = await mailer.sendMail({
     from: '"Remix Dashboard" <no-reply@mail.io>',
     to: email,
     subject: "Remix Dashboard - Your password has changed",
-    html,
+    html: render(PasswordUpdated({ email, name })),
   });
 
   if (!mailInfo.messageId) return null;

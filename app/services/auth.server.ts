@@ -9,8 +9,8 @@ import { prisma } from "~/utils/db.server";
 const SESSION_EXPIRATION_TIME = 1000 * 60 * 60 * 24 * 30;
 const sessionExpirationDate = new Date(Date.now() + SESSION_EXPIRATION_TIME);
 
-// Token expiration in 30 minutes
-const RESET_TOKEN_EXPIRATION_TIME = 1000 * 60 * 30;
+// Token expiration in 10 minutes
+const RESET_TOKEN_EXPIRATION_TIME = 1000 * 60 * 10;
 const resetTokenExpirationDate = new Date(
   Date.now() + RESET_TOKEN_EXPIRATION_TIME
 );
@@ -123,11 +123,11 @@ export async function requireAnonymous(request: Request) {
 }
 
 export async function createResetToken(userId: User["id"]) {
-  const generatedToken = crypto.randomBytes(32).toString("hex");
+  const token = crypto.randomBytes(32).toString("hex");
 
   const resetTokenData = {
     expires: resetTokenExpirationDate,
-    token: generatedToken,
+    token,
     userId,
   };
 
@@ -138,7 +138,7 @@ export async function createResetToken(userId: User["id"]) {
     select: { token: true },
   });
 
-  return generatedToken;
+  return token;
 }
 
 export async function resetUserPassword({

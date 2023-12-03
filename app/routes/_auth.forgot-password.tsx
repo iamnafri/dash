@@ -52,7 +52,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const user = await prisma.user.findUnique({
     where: { email },
-    select: { id: true },
+    select: { id: true, name: true, email: true },
   });
 
   if (!user) {
@@ -62,8 +62,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const resetToken = await createResetToken(user.id);
 
   sendResetPasswordEmail({
-    email,
-    html: `<a href="${requestUrl.origin}/reset-password?token=${resetToken}">Reset Paassword</a>`,
+    email: user.email,
+    name: user.name,
+    resetLink: `${requestUrl.origin}/reset-password?token=${resetToken}`,
   });
 
   return json({ status: "done", submission });
