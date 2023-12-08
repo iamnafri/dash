@@ -19,11 +19,9 @@ import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { z } from "zod";
 import { Logo } from "~/components";
 import { AlertProps } from "~/components/ui";
-import {
-  handleNewLoginSession,
-  login,
-  requireAnonymous,
-} from "~/services/auth.server";
+import { createSession } from "~/modules/session/create-session.server";
+import { verifyCredential } from "~/modules/user/verify-credential.server";
+import { handleNewLoginSession, requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -52,15 +50,21 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       LoginSchema.transform(async (data, ctx) => {
         if (intent !== "submit") return { ...data, session: null };
 
-        const session = await login(data);
+        const { email, password } = data;
 
-        if (!session) {
+        const validCredential = await verifyCredential({ email, password });
+
+        if (!validCredential) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "Invalid email or password",
           });
           return z.NEVER;
         }
+
+        const session = await createSession({
+          userId: validCredential,
+        });
 
         return { ...data, session };
       }),

@@ -13,7 +13,7 @@ import {
   type MetaFunction,
 } from "@remix-run/node";
 import { Header } from "~/components";
-import { requireUserId } from "~/services/auth.server";
+import { requireUserId } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [

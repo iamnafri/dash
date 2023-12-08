@@ -6,7 +6,10 @@ const schema = z.object({
   SMTP_PORT: z.string(),
   SMTP_USER: z.string(),
   SMTP_PASS: z.string(),
+  SMTP_FROM_NAME: z.string(),
+  SMTP_FROM_EMAIL: z.string(),
   SESSION_SECRET: z.string(),
+  WEBAPP_URL: z.string(),
 });
 
 declare global {

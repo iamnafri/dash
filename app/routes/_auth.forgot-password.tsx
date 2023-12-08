@@ -12,9 +12,9 @@ import { useFetcher } from "@remix-run/react";
 import { z } from "zod";
 import { Logo } from "~/components";
 import { AlertProps } from "~/components/ui";
-import { createResetToken, requireAnonymous } from "~/services/auth.server";
-import { sendResetPasswordEmail } from "~/services/mail.server";
-import { prisma } from "~/utils/db.server";
+import { forgotPassword } from "~/modules/user/forgot-password.server";
+import { getUserByEmail } from "~/modules/user/get-user-by-mail.server";
+import { requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,13 +31,14 @@ const ForgotPasswordSchema = z.object({
 
 export async function loader({ request }: LoaderFunctionArgs) {
   await requireAnonymous(request);
-  return json({});
+
+  return new Response(null, {
+    status: 200,
+  });
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const requestUrl = new URL(request.url);
-
   const submission = await parse(formData, { schema: ForgotPasswordSchema });
 
   if (submission.intent !== "submit") {
@@ -49,23 +50,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   }
 
   const { email } = submission.value;
-
-  const user = await prisma.user.findUnique({
-    where: { email },
-    select: { id: true, name: true, email: true },
-  });
+  const user = await getUserByEmail({ email });
 
   if (!user) {
     return json({ status: "done", submission });
   }
 
-  const resetToken = await createResetToken(user.id);
-
-  sendResetPasswordEmail({
-    email: user.email,
-    name: user.name,
-    resetLink: `${requestUrl.origin}/reset-password?token=${resetToken}`,
-  });
+  await forgotPassword({ userId: user.id });
 
   return json({ status: "done", submission });
 };

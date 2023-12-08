@@ -18,9 +18,9 @@ import {
 import { z } from "zod";
 import { Logo } from "~/components";
 import { AlertProps } from "~/components/ui";
-import { requireAnonymous, resetUserPassword } from "~/services/auth.server";
-import { sendUpdatedPasswordEmail } from "~/services/mail.server";
-import { prisma } from "~/utils/db.server";
+import { getResetToken } from "~/modules/user/get-reset-token.server";
+import { resetPassword } from "~/modules/user/reset-password.server";
+import { requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -57,15 +57,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const token = url.searchParams.get("token");
 
   if (!token) {
-    return json({ status: "error", userId: null } as const, {
-      status: 400,
+    throw new Response(null, {
+      status: 404,
     });
   }
 
-  const user = await prisma.passwordResetToken.findUnique({
-    where: { token, expires: { gt: new Date() } },
-    select: { userId: true },
-  });
+  const user = await getResetToken({ token });
 
   if (!user) {
     return json({ status: "error", userId: null } as const, {
@@ -93,12 +90,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   const { password, userId } = submission.value;
 
-  const { email, name } = await resetUserPassword({ userId, password });
-
-  sendUpdatedPasswordEmail({
-    name,
-    email,
-  });
+  await resetPassword({ userId, password });
 
   return redirect("/login");
 };

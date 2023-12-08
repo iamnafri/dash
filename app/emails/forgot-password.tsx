@@ -1,17 +1,17 @@
 import { Button, Section, Text } from "@react-email/components";
-import { Layout } from "./components/layout";
+import { Layout } from "~/emails/components/layout";
 
-interface ResetPasswordLinkProps {
+interface ForgotPasswordTemplateProps {
   name: string;
   email: string;
-  resetLink: string;
+  resetPasswordLink: string;
 }
 
-export function ResetPasswordLink({
+export function ForgotPasswordTemplate({
   name,
   email,
-  resetLink,
-}: ResetPasswordLinkProps) {
+  resetPasswordLink,
+}: ForgotPasswordTemplateProps) {
   return (
     <Layout preview="Remix dashboard reset your password">
       <Section>
@@ -25,7 +25,7 @@ export function ResetPasswordLink({
         <Section className="mt-[32px] mb-[32px]">
           <Button
             className="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center px-[20px] py-[12px]"
-            href={resetLink}
+            href={resetPasswordLink}
           >
             Reset password
           </Button>

@@ -1,12 +1,15 @@
 import { Section, Text } from "@react-email/components";
-import { Layout } from "./components/layout";
+import { Layout } from "~/emails/components/layout";
 
-interface PasswordUpdatedProps {
+interface ResetPasswordTemplateProps {
   name: string;
   email: string;
 }
 
-export function PasswordUpdated({ name, email }: PasswordUpdatedProps) {
+export function ResetPasswordTemplate({
+  name,
+  email,
+}: ResetPasswordTemplateProps) {
   return (
     <Layout preview="Remix dashboard reset your password">
       <Section>
