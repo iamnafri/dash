@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { ResetPasswordTemplate } from "~/emails/reset-password";
-import { prisma } from "~/utils/db.server";
-import { mailer, renderReactEmail } from "~/utils/mail.server";
+import { prisma } from "~/libs/db.server";
+import { mailer, renderReactEmail } from "~/libs/mail.server";
 
 type SendResetPasswordOption = {
   userId: string;

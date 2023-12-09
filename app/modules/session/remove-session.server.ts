@@ -1,4 +1,4 @@
-import { prisma } from "~/utils/db.server";
+import { prisma } from "~/libs/db.server";
 
 type RemoveSessionOptions = {
   sessionId: string;

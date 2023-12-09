@@ -1,5 +1,5 @@
 import { compare } from "bcryptjs";
-import { prisma } from "~/utils/db.server";
+import { prisma } from "~/libs/db.server";
 
 type VerifyCredentialOption = {
   email: string;

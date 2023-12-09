@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { ForgotPasswordTemplate } from "~/emails/forgot-password";
-import { prisma } from "~/utils/db.server";
-import { mailer, renderReactEmail } from "~/utils/mail.server";
+import { prisma } from "~/libs/db.server";
+import { mailer, renderReactEmail } from "~/libs/mail.server";
 
 type SendForgotPasswordOption = {
   userId: string;

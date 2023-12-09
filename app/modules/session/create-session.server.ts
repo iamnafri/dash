@@ -1,5 +1,5 @@
 import { ONE_MONTH } from "~/constants/time";
-import { prisma } from "~/utils/db.server";
+import { prisma } from "~/libs/db.server";
 
 type CreateSessionOptions = {
   userId: string;

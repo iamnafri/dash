@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import { TEN_MINUTES } from "~/constants/time";
 import { sendForgotPassword } from "~/modules/auth/send-forgot-password.sever";
-import { prisma } from "~/utils/db.server";
+import { prisma } from "~/libs/db.server";
 
 type ForgotPasswordOption = {
   userId: string;

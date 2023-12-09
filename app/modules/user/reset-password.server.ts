@@ -1,6 +1,6 @@
 import { hash } from "bcryptjs";
 import { sendResetPassword } from "~/modules/auth/send-reset-password.sever";
-import { prisma } from "~/utils/db.server";
+import { prisma } from "~/libs/db.server";
 
 type ResetPasswordOption = {
   userId: string;
