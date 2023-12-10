@@ -1,6 +1,6 @@
-const { nextui } = require("@nextui-org/react");
+import { nextui } from "@nextui-org/react";
+import { Config } from "tailwindcss";
 
-/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -23,4 +23,4 @@ export default {
       },
     }),
   ],
-};
+} satisfies Config;
