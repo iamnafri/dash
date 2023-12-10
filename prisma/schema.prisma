@@ -19,8 +19,9 @@ model User {
   updatedAt DateTime @updatedAt
 
   password           Password?
-  session            Session[]
+  sessions           Session[]
   passwordResetToken PasswordResetToken?
+  roles              Role[]
 }
 
 model Password {
@@ -54,4 +55,31 @@ model PasswordResetToken {
   userId String @unique
 
   @@index([userId])
+}
+
+model Role {
+  id          String @id @default(cuid())
+  name        String @unique
+  description String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users       User[]
+  permissions Permission[]
+}
+
+model Permission {
+  id          String @id @default(cuid())
+  entity      String
+  action      String
+  access      String
+  description String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  roles Role[]
+
+  @@unique([entity, action, access])
 }

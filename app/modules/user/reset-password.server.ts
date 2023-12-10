@@ -24,7 +24,7 @@ export async function resetPassword({ userId, password }: ResetPasswordOption) {
           userId,
         },
       },
-      session: {
+      sessions: {
         deleteMany: {
           userId,
         },
