@@ -10,7 +10,7 @@ export async function verifyCredential({
   email,
   password,
 }: VerifyCredentialOption) {
-  const user = await prisma.user.findUniqueOrThrow({
+  const user = await prisma.user.findFirst({
     where: { email },
     select: { id: true, password: { select: { hash: true } } },
   });

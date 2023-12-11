@@ -2,7 +2,7 @@ import { VariantProps, tv } from "@nextui-org/react";
 import { FC, HTMLAttributes, ReactNode } from "react";
 
 const alertStyles = tv({
-  base: "border px-4 bg-default-50 py-3 rounded-xl [&>p]:m-0",
+  base: "border px-4 bg-default-50 py-3 rounded-medium [&>p]:m-0",
   variants: {
     variant: {
       default: "border-default-200 dark:border-default-100 bg-default-200/20",
@@ -32,7 +32,7 @@ export interface AlertProps
   children?: ReactNode;
 }
 
-export const AlertProps: FC<AlertProps> = ({
+export const Alert: FC<AlertProps> = ({
   children,
   variant,
   size,

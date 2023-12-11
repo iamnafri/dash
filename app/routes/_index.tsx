@@ -12,7 +12,7 @@ import {
   type LoaderFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import { Header } from "~/components";
+import { Header } from "~/components/header";
 import { requireUserId } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {

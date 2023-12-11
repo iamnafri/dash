@@ -21,6 +21,16 @@ export default {
           large: "10px",
         },
       },
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: "hsl(262.1 83.3% 57.8%)",
+              foreground: "hsl(210 20% 98%)",
+            },
+          },
+        },
+      },
     }),
   ],
 } satisfies Config;

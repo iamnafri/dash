@@ -1,3 +1,4 @@
+import "~/styles/tailwind.css";
 import {
   Links,
   LiveReload,
@@ -8,7 +9,6 @@ import {
   useNavigate,
 } from "@remix-run/react";
 import { NextUIProvider } from "@nextui-org/react";
-import "~/styles/tailwind.css";
 
 export default function App() {
   const navigate = useNavigate();
@@ -21,13 +21,13 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen bg-background text-foreground font-sans antialiased">
         <NextUIProvider navigate={navigate}>
           <Outlet />
-          <ScrollRestoration />
-          <LiveReload />
-          <Scripts />
         </NextUIProvider>
+        <ScrollRestoration />
+        <LiveReload />
+        <Scripts />
       </body>
     </html>
   );

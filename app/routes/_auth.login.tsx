@@ -1,14 +1,7 @@
 import { useForm } from "@conform-to/react";
 import { getFieldsetConstraint, parse } from "@conform-to/zod";
-import { EnvelopeIcon, EyeIcon } from "@heroicons/react/24/outline";
-import {
-  Button,
-  Card,
-  CardBody,
-  Checkbox,
-  Input,
-  Link,
-} from "@nextui-org/react";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { Link } from "@nextui-org/react";
 import {
   type ActionFunctionArgs,
   type MetaFunction,
@@ -17,8 +10,11 @@ import {
 } from "@remix-run/node";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { z } from "zod";
-import { Logo } from "~/components";
-import { AlertProps } from "~/components/ui";
+import { Logo } from "~/components/logo";
+import { Alert } from "~/components/ui/alert";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { InputPassword } from "~/components/ui/input-password";
 import { createSession } from "~/modules/session/create-session.server";
 import { verifyCredential } from "~/modules/user/verify-credential.server";
 import { handleNewLoginSession, requireAnonymous } from "~/utils/auth.server";
@@ -110,79 +106,47 @@ export default function Login() {
           Login to your account
         </h1>
       </div>
-      <Card shadow="sm" classNames={{ base: "w-full" }}>
-        <CardBody className="p-6">
-          {form.error && (
-            <AlertProps
-              id={form.errorId}
-              variant="danger"
-              size="small"
-              className="mb-5"
-            >
-              {form.error}
-            </AlertProps>
-          )}
-          <Form
-            method="post"
-            className="flex flex-col justify-between gap-4"
-            {...form.props}
-          >
-            <Input
-              autoComplete="off"
-              endContent={
-                <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
-              }
-              label="Email"
-              labelPlacement="outside"
-              placeholder="Enter your email"
-              variant="flat"
-              name="email"
-              type="email"
-              defaultValue={email.defaultValue}
-              errorMessage={email.error}
-              isInvalid={!!email.error}
-            />
-            <Input
-              endContent={
-                <EyeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
-              }
-              label="Password"
-              labelPlacement="outside"
-              placeholder="Enter your password"
-              type="password"
-              variant="flat"
-              name="password"
-              defaultValue={password.defaultValue}
-              errorMessage={password.error}
-              isInvalid={!!password.error}
-            />
-            <div className="flex justify-between">
-              <Checkbox
-                classNames={{
-                  label: "text-small",
-                }}
-                name="remember"
-              >
-                Remember me
-              </Checkbox>
-              <Link color="primary" href="/forgot-password" size="sm">
-                Forgot password?
-              </Link>
-            </div>
-
-            <Button
-              color="primary"
-              type="submit"
-              isLoading={isSubmitting}
-              className="mt-5"
-              disableRipple
-              disableAnimation
-            >
-              Sign in
-            </Button>
-          </Form>
-        </CardBody>
-      </Card>
+      {form.error && (
+        <Alert id={form.errorId} variant="danger" size="small" className="mb-5">
+          {form.error}
+        </Alert>
+      )}
+      <Form
+        method="post"
+        className="flex flex-col justify-between gap-4"
+        {...form.props}
+      >
+        <Input
+          endContent={
+            <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+          }
+          label="Email"
+          placeholder="Enter your email"
+          name="email"
+          type="email"
+          defaultValue={email.defaultValue}
+          errorMessage={email.error}
+          isInvalid={!!email.error}
+        />
+        <InputPassword
+          label="Password"
+          placeholder="Enter your password"
+          name="password"
+          defaultValue={password.defaultValue}
+          errorMessage={password.error}
+          isInvalid={!!password.error}
+        />
+        <Button type="submit" isLoading={isSubmitting} size="lg">
+          Sign in
+        </Button>
+      </Form>
+      <Link
+        color="primary"
+        href="/forgot-password"
+        className="text-center text-xs underline text-foreground"
+      >
+        Forgot password?
+      </Link>
     </>
   );
 }

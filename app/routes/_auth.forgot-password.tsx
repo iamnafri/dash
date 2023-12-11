@@ -1,7 +1,7 @@
 import { useForm } from "@conform-to/react";
 import { getFieldsetConstraint, parse } from "@conform-to/zod";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { Button, Card, CardBody, Input } from "@nextui-org/react";
+import { Link } from "@nextui-org/react";
 import {
   type ActionFunctionArgs,
   type MetaFunction,
@@ -10,8 +10,10 @@ import {
 } from "@remix-run/node";
 import { useFetcher } from "@remix-run/react";
 import { z } from "zod";
-import { Logo } from "~/components";
-import { AlertProps } from "~/components/ui";
+import { Logo } from "~/components/logo";
+import { Alert } from "~/components/ui/alert";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { forgotPassword } from "~/modules/user/forgot-password.server";
 import { getUserByEmail } from "~/modules/user/get-user-by-mail.server";
 import { requireAnonymous } from "~/utils/auth.server";
@@ -82,47 +84,45 @@ export default function ForgotPassword() {
           Forgot Password
         </h1>
       </div>
-      <Card shadow="sm" classNames={{ base: "w-full" }}>
-        <CardBody className="p-6">
-          {forgotPassword.data?.status === "done" && (
-            <AlertProps variant="success" size="small" className="mb-5">
-              Please check your email
-            </AlertProps>
-          )}
-          <forgotPassword.Form
-            method="post"
-            className="flex flex-col justify-between"
-            {...form.props}
-          >
-            <Input
-              autoComplete="off"
-              endContent={
-                <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
-              }
-              label="Email"
-              labelPlacement="outside"
-              placeholder="Enter your email"
-              variant="flat"
-              name="email"
-              type="email"
-              defaultValue={email.defaultValue}
-              errorMessage={email.error}
-              isInvalid={!!email.error}
-            />
+      {forgotPassword.data?.status === "done" && (
+        <Alert variant="success" size="small" className="mb-5">
+          You’ve been emailed a password reset link.
+        </Alert>
+      )}
+      <forgotPassword.Form
+        method="post"
+        className="flex flex-col justify-between gap-4"
+        {...form.props}
+      >
+        <Input
+          endContent={
+            <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+          }
+          label="Email"
+          placeholder="Enter your email"
+          name="email"
+          type="email"
+          defaultValue={email.defaultValue}
+          errorMessage={email.error}
+          isInvalid={!!email.error}
+        />
 
-            <Button
-              color="primary"
-              type="submit"
-              isLoading={forgotPassword.state === "submitting"}
-              className="mt-5"
-              disableRipple
-              disableAnimation
-            >
-              Reset Password
-            </Button>
-          </forgotPassword.Form>
-        </CardBody>
-      </Card>
+        <Button
+          type="submit"
+          isLoading={forgotPassword.state === "submitting"}
+          size="lg"
+        >
+          Reset Password
+        </Button>
+      </forgotPassword.Form>
+
+      <Link
+        color="primary"
+        href="/login"
+        className="text-center text-xs underline text-foreground"
+      >
+        Go to login
+      </Link>
     </>
   );
 }
