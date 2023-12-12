@@ -78,25 +78,25 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4">
-        <Logo className="w-16 h-16" />
+      <div className="flex flex-col items-center gap-unit-4">
+        <Logo className="w-unit-16 h-unit-16" />
         <h1 className="block text-2xl font-bold text-slate-800 dark:text-white">
           Forgot Password
         </h1>
       </div>
       {forgotPassword.data?.status === "done" && (
-        <Alert variant="success" size="small" className="mb-5">
+        <Alert variant="success" size="small" className="mb-unit-5">
           You’ve been emailed a password reset link.
         </Alert>
       )}
       <forgotPassword.Form
         method="post"
-        className="flex flex-col justify-between gap-4"
+        className="flex flex-col justify-between gap-unit-4"
         {...form.props}
       >
         <Input
           endContent={
-            <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+            <EnvelopeIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
           }
           label="Email"
           placeholder="Enter your email"
@@ -112,7 +112,7 @@ export default function ForgotPassword() {
           isLoading={forgotPassword.state === "submitting"}
           size="lg"
         >
-          Reset Password
+          Send reset link
         </Button>
       </forgotPassword.Form>
 

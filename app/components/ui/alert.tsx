@@ -2,15 +2,15 @@ import { VariantProps, tv } from "@nextui-org/react";
 import { FC, HTMLAttributes, ReactNode } from "react";
 
 const alertStyles = tv({
-  base: "border px-4 bg-default-50 py-3 rounded-medium [&>p]:m-0",
+  base: "px-unit-4 bg-default-50 py-unit-3 rounded-medium [&>p]:m-0",
   variants: {
     variant: {
-      default: "border-default-200 dark:border-default-100 bg-default-200/20",
-      primary: "border-primary text-primary bg-primary-50",
-      secondary: "border-secondary text-secondary bg-secondary-50",
-      success: "border-success text-success bg-success-50",
-      warning: "border-warning text-warning bg-warning-50",
-      danger: "border-danger text-danger bg-danger-50",
+      default: "bg-default-200/20",
+      primary: "text-primary bg-primary-50",
+      secondary: "text-secondary bg-secondary-50",
+      success: "text-success bg-success-50",
+      warning: "text-warning bg-warning-50",
+      danger: "text-danger bg-danger-50",
     },
     size: {
       small: "text-small",

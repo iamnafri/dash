@@ -28,6 +28,26 @@ export default {
               DEFAULT: "hsl(262.1 83.3% 57.8%)",
               foreground: "hsl(210 20% 98%)",
             },
+            // background: {
+            //   DEFAULT: "hsl(0 0% 100%)",
+            // },
+            // foreground: {
+            //   DEFAULT: "hsl(224 71.4% 4.1%)",
+            // },
+          },
+        },
+        dark: {
+          colors: {
+            primary: {
+              DEFAULT: "hsl(263.4 70% 50.4%)",
+              foreground: "hsl(210 20% 98%)",
+            },
+            // background: {
+            //   DEFAULT: "hsl(224 71.4% 4.1%)",
+            // },
+            // foreground: {
+            //   DEFAULT: "hsl(210 20% 98%)",
+            // },
           },
         },
       },

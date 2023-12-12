@@ -113,8 +113,8 @@ export default function ResetPassword() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4">
-        <Logo className="w-16 h-16" />
+      <div className="flex flex-col items-center gap-unit-4">
+        <Logo className="w-unit-16 h-unit-16" />
         <h1 className="block text-2xl font-bold text-slate-800 dark:text-white">
           Reset Password
         </h1>
@@ -126,7 +126,7 @@ export default function ResetPassword() {
       ) : (
         <Form
           method="post"
-          className="flex flex-col justify-between gap-4"
+          className="flex flex-col justify-between gap-unit-4"
           {...form.props}
         >
           <InputPassword
@@ -154,7 +154,7 @@ export default function ResetPassword() {
           />
 
           <Button type="submit" size="lg" isLoading={isSubmitting}>
-            Change Password
+            Change password
           </Button>
         </Form>
       )}

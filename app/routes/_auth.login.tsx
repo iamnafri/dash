@@ -100,25 +100,30 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4">
-        <Logo className="w-16 h-16" />
+      <div className="flex flex-col items-center gap-unit-4">
+        <Logo className="w-unit-16 h-unit-16" />
         <h1 className="block text-2xl font-bold text-slate-800 dark:text-white">
           Login to your account
         </h1>
       </div>
       {form.error && (
-        <Alert id={form.errorId} variant="danger" size="small" className="mb-5">
+        <Alert
+          id={form.errorId}
+          variant="danger"
+          size="small"
+          className="mb-unit-5"
+        >
           {form.error}
         </Alert>
       )}
       <Form
         method="post"
-        className="flex flex-col justify-between gap-4"
+        className="flex flex-col justify-between gap-unit-4"
         {...form.props}
       >
         <Input
           endContent={
-            <EnvelopeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+            <EnvelopeIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
           }
           label="Email"
           placeholder="Enter your email"

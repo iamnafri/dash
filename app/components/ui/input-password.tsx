@@ -22,9 +22,9 @@ export const InputPassword = forwardRef<"input", InputPasswordProps>(
             onClick={toggleVisibility}
           >
             {isVisible ? (
-              <EyeSlashIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+              <EyeSlashIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
             ) : (
-              <EyeIcon className="text-default-400 h-6 w-6 pointer-events-none" />
+              <EyeIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
             )}
           </button>
         }
