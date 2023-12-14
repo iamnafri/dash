@@ -1,6 +1,6 @@
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { InputProps, forwardRef } from "@nextui-org/react";
 import { useState } from "react";
+import { Icon } from "~/components/ui/icon";
 import { Input } from "~/components/ui/input";
 
 export interface InputPasswordProps
@@ -21,11 +21,12 @@ export const InputPassword = forwardRef<"input", InputPasswordProps>(
             type="button"
             onClick={toggleVisibility}
           >
-            {isVisible ? (
-              <EyeSlashIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
-            ) : (
-              <EyeIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
-            )}
+            <Icon
+              name={isVisible ? "eye-off" : "eye"}
+              classNames={{
+                icon: "text-default-400 h-unit-6 w-unit-6 pointer-events-none self-end",
+              }}
+            />
           </button>
         }
         type={isVisible ? "text" : "password"}

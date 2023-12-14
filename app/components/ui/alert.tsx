@@ -42,7 +42,7 @@ export const Alert: FC<AlertProps> = ({
   const styles = alertStyles({ variant, size, className });
 
   return (
-    <div className={styles} {...props}>
+    <div role="alert" className={styles} {...props}>
       {children}
     </div>
   );

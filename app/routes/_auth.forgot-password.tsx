@@ -1,6 +1,5 @@
 import { useForm } from "@conform-to/react";
 import { getFieldsetConstraint, parse } from "@conform-to/zod";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { Link } from "@nextui-org/react";
 import {
   type ActionFunctionArgs,
@@ -13,6 +12,7 @@ import { z } from "zod";
 import { Logo } from "~/components/logo";
 import { Alert } from "~/components/ui/alert";
 import { Button } from "~/components/ui/button";
+import { Icon } from "~/components/ui/icon";
 import { Input } from "~/components/ui/input";
 import { forgotPassword } from "~/modules/user/forgot-password.server";
 import { getUserByEmail } from "~/modules/user/get-user-by-mail.server";
@@ -96,7 +96,12 @@ export default function ForgotPassword() {
       >
         <Input
           endContent={
-            <EnvelopeIcon className="text-default-400 h-unit-6 w-unit-6 pointer-events-none" />
+            <Icon
+              name="mail"
+              classNames={{
+                icon: "text-default-400 h-unit-5 w-unit-5 pointer-events-none self-end",
+              }}
+            />
           }
           label="Email"
           placeholder="Enter your email"
