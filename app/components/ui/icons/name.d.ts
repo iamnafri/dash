@@ -6,4 +6,5 @@ export type IconName =
   | "home"
   | "log-out"
   | "mail"
+  | "user"
   | "users";
