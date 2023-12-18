@@ -96,7 +96,7 @@ export default {
               DEFAULT: colors.purple[500],
             },
             background: {
-              DEFAULT: slate[900],
+              DEFAULT: "rgb(14, 19, 32)",
             },
             foreground: {
               ...swapColorValues(slate),
@@ -110,7 +110,7 @@ export default {
               foreground: slate[50],
             },
             content2: {
-              DEFAULT: slate[800],
+              DEFAULT: "#1C2536",
               foreground: slate[100],
             },
             content3: {
