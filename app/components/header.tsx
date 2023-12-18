@@ -51,7 +51,7 @@ export function Header() {
 
   return (
     <header className="dark bg-content2 pt-unit-4 pb-unit-2 space-y-unit-6 shadow-medium">
-      <div className="container mx-auto px-unit-3">
+      <div className="container">
         <div className="flex items-center justify-between text-content2-foreground">
           <div className="inline-flex space-x-unit-3">
             <Logo className="h-8 w-8" />
@@ -121,7 +121,7 @@ export function Header() {
       <div className="relative overflow-hidden">
         <nav
           id="nav"
-          className="scrollbar-hide flex items-center overflow-auto space-x-unit-3 md:container md:mx-auto md:px-unit-3 md:-left-3"
+          className="scrollbar-hide flex items-center overflow-auto space-x-unit-3 md:container md:-left-3"
         >
           {menus.map((menu) => (
             <NavLink

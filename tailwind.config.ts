@@ -45,6 +45,16 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "var(--nextui-spacing-unit-3)",
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
+    },
     fontFamily: {
       sans: "'Plus Jakarta Sans', sans-seri",
     },

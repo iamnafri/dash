@@ -31,7 +31,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className="container mx-auto p-unit-6">
+      <div className="container">
         <Outlet />
       </div>
     </>
