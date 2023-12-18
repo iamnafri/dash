@@ -1,10 +1,4 @@
-import { IconName } from "~/components/ui/icon";
-
-export type Menu = {
-  title: string;
-  url: string;
-  icon?: IconName;
-};
+import { Menu } from "~/types";
 
 export const menus: Menu[] = [
   {

@@ -25,6 +25,25 @@
   <rect width="20" height="16" x="2" y="4" rx="2" ></rect>
   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" ></path>
 </symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="monitor">
+  <rect width="20" height="14" x="2" y="3" rx="2" ></rect>
+  <line x1="8" x2="16" y1="21" y2="21" ></line>
+  <line x1="12" x2="12" y1="17" y2="21" ></line>
+</symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="moon">
+  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" ></path>
+</symbol>
+<symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="sun">
+  <circle cx="12" cy="12" r="4" ></circle>
+  <path d="M12 2v2" ></path>
+  <path d="M12 20v2" ></path>
+  <path d="m4.93 4.93 1.41 1.41" ></path>
+  <path d="m17.66 17.66 1.41 1.41" ></path>
+  <path d="M2 12h2" ></path>
+  <path d="M20 12h2" ></path>
+  <path d="m6.34 17.66-1.41 1.41" ></path>
+  <path d="m19.07 4.93-1.41 1.41" ></path>
+</symbol>
 <symbol viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="user">
   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" ></path>
   <circle cx="12" cy="7" r="4" ></circle>

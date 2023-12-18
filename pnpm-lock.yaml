@@ -11,6 +11,9 @@ dependencies:
   '@conform-to/zod':
     specifier: ^0.9.1
     version: 0.9.1(@conform-to/dom@0.9.1)(zod@3.22.4)
+  '@epic-web/client-hints':
+    specifier: ^1.2.2
+    version: 1.2.2
   '@epic-web/remember':
     specifier: ^1.0.2
     version: 1.0.2
@@ -41,6 +44,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  color2k:
+    specifier: ^2.0.3
+    version: 2.0.3
   framer-motion:
     specifier: ^10.16.5
     version: 10.16.5(react-dom@18.2.0)(react@18.2.0)
@@ -604,6 +610,10 @@ packages:
     resolution: {integrity: sha512-Ja/Vfqe3HpuzRsG1oBtWTHk2PGZ7GR+2Vz5iYGelAw8dx32K0y7PjVuxK6z1nMpZOqAFsRUPCkK1YjJ56qJlgw==}
     dev: false
     optional: true
+
+  /@epic-web/client-hints@1.2.2:
+    resolution: {integrity: sha512-36ei/PACvvi/nh/7uKbITnZd8EP39UzYdmofrk5lqJLaPRpBt4pMeDf1bgOp0DXpuiWSVd02tcQgpu0H7blB2A==}
+    dev: false
 
   /@epic-web/remember@1.0.2:
     resolution: {integrity: sha512-K7DcGoRPqVkjVhPEMQzqw7W/c3hq/3LuiI74he6SkXwR6A49aUmXpxmdb6o+NldY4FFtG42U7nL8PrqNGRxXuQ==}
@@ -2217,7 +2227,7 @@ packages:
       tailwindcss: '*'
     dependencies:
       color: 4.2.3
-      color2k: 2.0.2
+      color2k: 2.0.3
       deepmerge: 4.3.1
       flat: 5.0.2
       lodash.foreach: 4.5.0
@@ -4863,8 +4873,8 @@ packages:
       simple-swizzle: 0.2.2
     dev: false
 
-  /color2k@2.0.2:
-    resolution: {integrity: sha512-kJhwH5nAwb34tmyuqq/lgjEKzlFXn1U99NlnB6Ws4qVaERcRUYeYP1cBw6BJ4vxaWStAUEef4WMr7WjOCnBt8w==}
+  /color2k@2.0.3:
+    resolution: {integrity: sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==}
     dev: false
 
   /color@4.2.3:

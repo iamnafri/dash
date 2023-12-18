@@ -18,6 +18,7 @@
   "dependencies": {
     "@conform-to/react": "^0.9.1",
     "@conform-to/zod": "^0.9.1",
+    "@epic-web/client-hints": "^1.2.2",
     "@epic-web/remember": "^1.0.2",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.6.0",
@@ -28,6 +29,7 @@
     "bcryptjs": "^2.4.3",
     "chalk": "^5.3.0",
     "clsx": "^2.0.0",
+    "color2k": "^2.0.3",
     "framer-motion": "^10.16.5",
     "isbot": "^3.6.8",
     "nodemailer": "^6.9.7",
