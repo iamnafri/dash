@@ -20,10 +20,7 @@ import { verifyCredential } from "~/modules/user/verify-credential.server";
 import { handleNewLoginSession, requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Login - Remix Dashboard" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Login - Remix Dashboard" }];
 };
 
 const LoginSchema = z.object({

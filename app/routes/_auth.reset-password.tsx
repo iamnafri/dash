@@ -23,10 +23,7 @@ import { resetPassword } from "~/modules/user/reset-password.server";
 import { requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Reset Password - Remix Dashboard" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Reset Password - Remix Dashboard" }];
 };
 
 const ResetPasswordSchema = z

@@ -19,10 +19,7 @@ import { getUserByEmail } from "~/modules/user/get-user-by-mail.server";
 import { requireAnonymous } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Forgot Password - Remix Dashboard" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Forgot Password - Remix Dashboard" }];
 };
 
 const ForgotPasswordSchema = z.object({

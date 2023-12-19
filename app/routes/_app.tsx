@@ -10,10 +10,7 @@ import { getUserById } from "~/modules/user/get-user-by-id.server";
 import { requireUserId } from "~/utils/auth.server";
 
 export const meta: MetaFunction = () => {
-  return [
-    { title: "Remix Dashboard" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
+  return [{ title: "Remix Dashboard" }];
 };
 
 export async function loader({ request }: LoaderFunctionArgs) {
