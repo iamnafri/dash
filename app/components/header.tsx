@@ -50,7 +50,7 @@ export function Header() {
   };
 
   return (
-    <header className="dark bg-content2 pt-unit-4 pb-unit-2 space-y-unit-6 shadow-medium">
+    <header className="dark sticky top-0 bg-content2 pt-unit-4 pb-unit-2 space-y-unit-6 shadow-medium">
       <div className="container">
         <div className="flex items-center justify-between text-content2-foreground">
           <div className="inline-flex space-x-unit-3">
