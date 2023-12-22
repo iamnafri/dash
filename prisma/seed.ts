@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { faker } from "@faker-js/faker";
+
 const prisma = new PrismaClient();
 async function main() {
   console.log("🌱 Seeding...");
@@ -43,7 +45,32 @@ async function main() {
   });
   console.timeEnd("👑 Created roles...");
 
-  console.time("👤 Created user...");
+  const totalUsers = 20;
+  console.time(`👤 Created ${totalUsers} users...`);
+
+  for (let index = 0; index < totalUsers; index++) {
+    const firstName = faker.person.firstName();
+    const lastName = faker.person.lastName();
+    const name = `${firstName} ${lastName}`;
+    const email = faker.internet.email({
+      firstName: firstName.toLowerCase(),
+      lastName: lastName.toLowerCase(),
+    });
+    const password = await bcrypt.hash("fakeuser", 10);
+
+    await prisma.user.create({
+      select: { id: true },
+      data: {
+        email,
+        name,
+        password: { create: { hash: password } },
+        roles: { connect: { name: "user" } },
+      },
+    });
+  }
+  console.timeEnd(`👤 Created ${totalUsers} users...`);
+
+  console.time("👤 Created user admin...");
   const password = await bcrypt.hash("budz", 10);
   await prisma.user.create({
     select: { id: true },
@@ -54,7 +81,7 @@ async function main() {
       roles: { connect: { name: "admin" } },
     },
   });
-  console.timeEnd("👤 Created user...");
+  console.timeEnd("👤 Created user admin...");
 
   console.timeEnd(`🌱 Database has been seeded`);
 }
