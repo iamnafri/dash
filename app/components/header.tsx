@@ -3,41 +3,16 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Link,
   User,
 } from "@nextui-org/react";
 import { Logo } from "./logo";
-import { Form, useLocation, useMatches, useSubmit } from "@remix-run/react";
+import { Form, NavLink, useMatches, useSubmit } from "@remix-run/react";
 import { useRef } from "react";
 import { menus } from "~/constants/menu";
 import { Icon } from "~/components/ui/icon";
 import { cn } from "~/utils/styles";
 import { User as UserType } from "@prisma/client";
 import { ThemeSwitch } from "~/components/theme-switch";
-import { Menu } from "~/types";
-
-export function NavLink({ title, url, icon }: Menu) {
-  const location = useLocation();
-  const isActive = location.pathname === url;
-
-  return (
-    <Link
-      key={title}
-      className={cn({
-        "rounded-large group relative hover:opacity-100 hover:bg-content3/40 text-content2-foreground/80":
-          true,
-        "bg-content3/60 text-content2-foreground hover:bg-content3/60":
-          isActive,
-      })}
-      href={url}
-    >
-      <div className="whitespace-nowrap px-unit-3 py-unit-2 flex items-center space-x-unit-3">
-        {icon && <Icon name={icon} size="sm" />}
-        <div className="font-semibold text-small">{title}</div>
-      </div>
-    </Link>
-  );
-}
 
 export function Header() {
   const match = useMatches().find((d) => d.id === "routes/_app");
@@ -125,11 +100,22 @@ export function Header() {
         >
           {menus.map((menu) => (
             <NavLink
-              key={menu.title}
-              title={menu.title}
-              url={menu.url}
-              icon={menu.icon}
-            />
+              key={menu.url}
+              to={menu.url}
+              className={({ isActive }) =>
+                cn({
+                  "rounded-large group relative hover:opacity-100 hover:bg-content3/40 text-content2-foreground/80":
+                    true,
+                  "bg-content3/60 text-content2-foreground hover:bg-content3/60":
+                    isActive,
+                })
+              }
+            >
+              <div className="whitespace-nowrap px-unit-3 py-unit-2 flex items-center space-x-unit-3">
+                {menu?.icon && <Icon name={menu.icon} size="sm" />}
+                <div className="font-semibold text-small">{menu.title}</div>
+              </div>
+            </NavLink>
           ))}
         </nav>
       </div>
