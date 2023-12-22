@@ -29,9 +29,8 @@ export async function handleNewLoginSession(
   request: Request,
   session: Pick<Session, "expires" | "id" | "userId">
 ) {
-  const { authSession, commitAuthSession } = await getAutSessionStorage(
-    request
-  );
+  const { authSession, commitAuthSession } =
+    await getAutSessionStorage(request);
   authSession.set("sessionId", session.id);
 
   return redirect("/", {
@@ -44,17 +43,16 @@ export async function handleNewLoginSession(
 }
 
 export async function requireUserId(request: Request) {
-  const { authSession, destroyAuthSession } = await getAutSessionStorage(
-    request
-  );
+  const { authSession, destroyAuthSession } =
+    await getAutSessionStorage(request);
   const sessionId = authSession.get("sessionId");
 
-  if (!sessionId) return null;
+  if (!sessionId) throw redirect("/login");
 
   const session = await getSessionById({ id: sessionId });
 
   if (!session?.user.id) {
-    throw redirect("/", {
+    throw redirect("/login", {
       headers: {
         "set-cookie": await destroyAuthSession(authSession),
       },
@@ -64,8 +62,9 @@ export async function requireUserId(request: Request) {
 }
 
 export async function requireAnonymous(request: Request) {
-  const userId = await requireUserId(request);
-  if (userId) {
+  const { authSession } = await getAutSessionStorage(request);
+  const sessionId = authSession.get("sessionId");
+  if (sessionId) {
     throw redirect("/");
   }
 }

@@ -15,11 +15,8 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const userId = await requireUserId(request);
-  if (!userId) {
-    throw redirect("/login");
-  }
 
-  const user = userId ? await getUserById({ id: userId }) : null;
+  const user = await getUserById({ id: userId });
 
   return json(user);
 }

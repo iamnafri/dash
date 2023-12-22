@@ -7,12 +7,11 @@ export async function loader() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const { authSession, destroyAuthSession } = await getAutSessionStorage(
-    request
-  );
+  const { authSession, destroyAuthSession } =
+    await getAutSessionStorage(request);
   const sessionId = authSession.get("sessionId");
 
-  if (sessionId) removeSession({ sessionId });
+  if (sessionId) await removeSession({ sessionId });
 
   throw redirect("/login", {
     headers: {
