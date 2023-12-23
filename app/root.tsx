@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  ShouldRevalidateFunctionArgs,
   useNavigate,
 } from "@remix-run/react";
 import { NextUIProvider } from "@nextui-org/react";
@@ -14,6 +15,17 @@ import { getTheme } from "~/utils/theme.server";
 import { clientHints } from "~/utils/client-hints";
 import { ClientHintCheck } from "~/components/client-hint-check";
 import { useTheme } from "~/utils/hooks/use-theme";
+
+export function shouldRevalidate({
+  formAction,
+  defaultShouldRevalidate,
+}: ShouldRevalidateFunctionArgs) {
+  if (formAction === "/prefereces/theme") {
+    return defaultShouldRevalidate;
+  }
+
+  return false;
+}
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const theme = await getTheme(request);

@@ -4,10 +4,22 @@ import {
   type LoaderFunctionArgs,
   type MetaFunction,
 } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
+import { Outlet, ShouldRevalidateFunctionArgs } from "@remix-run/react";
 import { Header } from "~/components/header";
 import { getUserById } from "~/modules/user/get-user-by-id.server";
 import { requireUserId } from "~/utils/auth.server";
+
+export function shouldRevalidate({
+  defaultShouldRevalidate,
+  currentUrl,
+  nextUrl,
+}: ShouldRevalidateFunctionArgs) {
+  if (currentUrl.pathname === nextUrl.pathname) {
+    return false;
+  }
+
+  return defaultShouldRevalidate;
+}
 
 export const meta: MetaFunction = () => {
   return [{ title: "Remix Dashboard" }];

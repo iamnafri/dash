@@ -7,7 +7,7 @@ export const menus: Menu[] = [
     icon: "home",
   },
   {
-    title: "Users",
+    title: "User Management",
     url: "/users",
     icon: "users",
   },

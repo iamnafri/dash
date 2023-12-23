@@ -56,6 +56,9 @@ dependencies:
   nodemailer:
     specifier: ^6.9.7
     version: 6.9.7
+  prisma-extension-pagination:
+    specifier: ^0.6.0
+    version: 0.6.0(@prisma/client@5.6.0)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -8364,6 +8367,14 @@ packages:
       condense-newlines: 0.2.1
       extend-shallow: 2.0.1
       js-beautify: 1.14.11
+    dev: false
+
+  /prisma-extension-pagination@0.6.0(@prisma/client@5.6.0):
+    resolution: {integrity: sha512-xur3CX4Q9X3NLeCvayTAMuAy88HtnHq31LeYhKUhcXDx6sHNl53aW9oe5j57cgxY9bwvHD3ygQLKD0Aly7xzIA==}
+    peerDependencies:
+      '@prisma/client': ^4.9.0 || ^5.0.0
+    dependencies:
+      '@prisma/client': 5.6.0(prisma@5.6.0)
     dev: false
 
   /prisma@5.6.0:
