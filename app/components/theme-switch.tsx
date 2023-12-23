@@ -18,6 +18,7 @@ import { useRootLoaderData } from "~/utils/hooks/use-root-loader-data";
 export function ThemeSwitch() {
   const fetcher = useFetcher<typeof themeAction>();
   const theme = useRootLoaderData().theme;
+  const isDarkMode = theme === "dark";
 
   const [form] = useForm({
     id: "theme-switch",
@@ -43,16 +44,11 @@ export function ThemeSwitch() {
           aria-label="Theme switcher"
           className="bg-transparent text-inherit hover:hover:bg-content3/40"
         >
-          <Icon
-            name="moon"
-            size="lg"
-            classNames={{ icon: "hidden dark:inline" }}
-          />
-          <Icon
-            name="sun"
-            size="lg"
-            classNames={{ icon: "inline dark:hidden" }}
-          />
+          {isDarkMode ? (
+            <Icon name="moon" size="lg" />
+          ) : (
+            <Icon name="sun" size="lg" />
+          )}
         </Button>
       </DropdownTrigger>
       <fetcher.Form method="POST" action="/prefereces/theme" {...form.props}>
