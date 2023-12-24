@@ -55,7 +55,7 @@ export function UserFilters({ roles }: UserFiltersProps) {
         placeholder="Select roles..."
         selectionMode="multiple"
         size="sm"
-        className="w-full sm:max-w-[30%]"
+        className="w-full md:max-w-[30%]"
         defaultSelectedKeys={rolesParam ? rolesParam.split(",") : []}
         onChange={onSelectRoles}
       >
@@ -73,7 +73,7 @@ export function UserFilters({ roles }: UserFiltersProps) {
         defaultValue={searchParam}
         startContent={<Icon name="search" size="sm" />}
         size="sm"
-        className="w-full sm:max-w-[70%]"
+        className="w-full md:max-w-[70%]"
         onKeyDown={onSearchInputKeydown}
         onBlur={onSearchInputBlur}
       />
