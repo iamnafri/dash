@@ -4,15 +4,15 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "vite build && vite build --ssr",
+    "build": "remix vite:build",
     "build:icons": "tsx ./scripts/build-icons.ts",
     "db:gen": "prisma generate && prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "dev": "vite dev",
+    "dev": "remix vite:dev",
     "sly": "sly add lucide-icons",
-    "start": "remix-serve ./build/index.js",
+    "start": "remix-serve ./build/server/index.js",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -23,9 +23,9 @@
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.6.0",
     "@react-email/components": "0.0.12",
-    "@remix-run/node": "^2.4.0",
-    "@remix-run/react": "^2.4.0",
-    "@remix-run/serve": "^2.4.0",
+    "@remix-run/node": "^2.4.1",
+    "@remix-run/react": "^2.4.1",
+    "@remix-run/serve": "^2.4.1",
     "bcryptjs": "^2.4.3",
     "chalk": "^5.3.0",
     "clsx": "^2.0.0",
@@ -41,8 +41,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
-    "@remix-run/dev": "^2.4.0",
-    "@remix-run/eslint-config": "^2.4.0",
+    "@remix-run/dev": "^2.4.1",
+    "@remix-run/eslint-config": "^2.4.1",
     "@sly-cli/sly": "^1.4.10",
     "@types/bcryptjs": "^2.4.6",
     "@types/fs-extra": "^11.0.4",
@@ -65,7 +65,7 @@
     "tailwindcss": "^3.3.5",
     "tsx": "^4.4.0",
     "typescript": "^5.1.6",
-    "vite": "^4.5.0",
+    "vite": "^5.0.10",
     "vite-tsconfig-paths": "^4.2.1"
   },
   "engines": {
