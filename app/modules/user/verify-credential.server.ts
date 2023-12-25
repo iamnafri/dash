@@ -1,4 +1,4 @@
-import { compare } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { prisma } from "~/libs/db.server";
 
 type VerifyCredentialOption = {
@@ -17,7 +17,7 @@ export async function verifyCredential({
 
   if (!user || !user.password) return null;
 
-  const matchedPassword = await compare(password, user.password.hash);
+  const matchedPassword = await bcrypt.compare(password, user.password.hash);
 
   if (!matchedPassword) return null;
 
