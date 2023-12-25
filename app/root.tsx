@@ -15,6 +15,8 @@ import { getTheme } from "~/utils/theme.server";
 import { clientHints } from "~/utils/client-hints";
 import { ClientHintCheck } from "~/components/client-hint-check";
 import { useTheme } from "~/utils/hooks/use-theme";
+import { ColorScheme } from "~/types";
+import { GeneralErrorBoundary } from "~/components/error-boundary";
 
 export function shouldRevalidate({
   formAction,
@@ -34,9 +36,16 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({ theme, hints });
 }
 
-export default function App() {
+function Document({
+  children,
+  theme = "light",
+  title,
+}: {
+  children: React.ReactNode;
+  theme?: ColorScheme;
+  title?: string;
+}) {
   const navigate = useNavigate();
-  const theme = useTheme();
 
   return (
     <html lang="en" className={theme}>
@@ -44,17 +53,34 @@ export default function App() {
         <ClientHintCheck />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {title ? <title>{title}</title> : null}
         <Meta />
         <Links />
       </head>
       <body className="min-h-screen bg-background text-foreground font-sans antialiased">
-        <NextUIProvider navigate={navigate}>
-          <Outlet />
-        </NextUIProvider>
+        <NextUIProvider navigate={navigate}>{children}</NextUIProvider>
         <ScrollRestoration />
-        <LiveReload />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  const theme = useTheme();
+
+  return (
+    <Document theme={theme}>
+      <Outlet />
+    </Document>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <Document title="Oops! Something went wrong">
+      <GeneralErrorBoundary />
+    </Document>
   );
 }
